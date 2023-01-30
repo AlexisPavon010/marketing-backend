@@ -46,6 +46,8 @@ export class PostsService {
 
   async update(id: string, updatePostDto: UpdatePostDto) {
 
+    console.log(updatePostDto)
+
     const post = await this.postModel.findOneAndUpdate({ _id: id }, updatePostDto, { new: true })
 
     return post
