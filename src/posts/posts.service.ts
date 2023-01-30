@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { isValidObjectId, Model } from 'mongoose';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -14,8 +14,13 @@ export class PostsService {
   ) { }
 
   async create(createPostDto: CreatePostDto) {
-    const post = await this.postModel.create(createPostDto)
-    return post;
+    try {
+      const post = await this.postModel.create(createPostDto)
+      return post;
+    } catch (error) {
+      console.log(error)
+      return new BadRequestException(`Error en crear el posteo`)
+    }
   }
 
   async findAll() {
