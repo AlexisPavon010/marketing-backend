@@ -19,7 +19,7 @@ export class PostsService {
       return post;
     } catch (error) {
       console.log(error)
-      return new BadRequestException(`Error en crear el posteo`)
+      return new BadRequestException(`Error en crear el posteo mirar la consola`)
     }
   }
 
@@ -45,12 +45,13 @@ export class PostsService {
   }
 
   async update(id: string, updatePostDto: UpdatePostDto) {
-
-    console.log(updatePostDto)
-
-    const post = await this.postModel.findOneAndUpdate({ _id: id }, updatePostDto, { new: true })
-
-    return post
+    try {
+      const post = await this.postModel.findOneAndUpdate({ _id: id }, updatePostDto, { new: true })
+      return post
+    } catch (error) {
+      console.log(error)
+      return new BadRequestException(`Error en crear el posteo mirar la consola`)
+    }
   }
 
   remove(id: number) {

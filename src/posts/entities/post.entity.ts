@@ -23,7 +23,11 @@ export class Post extends Document {
   @Prop({
     default: 0
   })
-  score: number;
+  adminScore: number;
+  @Prop({
+    default: 0
+  })
+  juryScore: number;
   @Prop({ default: now() })
   createdAt: Date;
   @Prop({ default: now() })
