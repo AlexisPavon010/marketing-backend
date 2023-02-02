@@ -17,7 +17,7 @@ export class BrandsService {
 
   async create(createBrandDto: CreateBrandDto) {
     return await this.brandModel.create({
-      brandName: createBrandDto.brandName,
+      brandName: createBrandDto.brandName.charAt(0).toUpperCase() + createBrandDto.brandName.slice(1),
       value: createBrandDto.brandName.split(' ').join('-')
     });
   }
