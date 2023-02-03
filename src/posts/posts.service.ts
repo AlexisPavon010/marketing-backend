@@ -24,7 +24,7 @@ export class PostsService {
   }
 
   async findAll() {
-    return await this.postModel.find()
+    return await this.postModel.find({ published: true }).sort({ createdAt: 'desc' })
   }
 
   async findOne(id: string) {
