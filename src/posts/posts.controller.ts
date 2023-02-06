@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UsePipes } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ValidationPipe, UsePipes, Query } from '@nestjs/common';
+
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { QueryPost } from './dto/query-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -14,8 +16,8 @@ export class PostsController {
   }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  findAll(@Query() queryPost: QueryPost) {
+    return this.postsService.findAll(queryPost);
   }
 
   @Get(':id')
@@ -23,9 +25,14 @@ export class PostsController {
     return this.postsService.findOne(id);
   }
 
+  @Get('/user/:id')
+  findOneByUserId(@Param('id') id: string, @Query() queryPost: QueryPost) {
+    return this.postsService.findOneByUserId(id, queryPost);
+  }
+
   @Get('/user/:id/category/:category')
-  findOneByUserId(@Param('id') id: string, @Param('category') category: string) {
-    return this.postsService.findOneByUserId(id, category);
+  findOneByUserIdAndCategory(@Param('id') id: string, @Param('category') category: string) {
+    return this.postsService.findOneByUserIdAndCategory(id, category);
   }
 
   @Patch(':id')
