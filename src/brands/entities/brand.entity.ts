@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { now } from "mongoose";
 
 @Schema()
 export class Brand {
@@ -7,6 +8,10 @@ export class Brand {
   brandName: string
   @Prop()
   value: string
+  @Prop({ default: now() })
+  createdAt: Date;
+  @Prop({ default: now() })
+  updatedAt: Date;
 }
 
 export const BrandSchema = SchemaFactory.createForClass(Brand)
