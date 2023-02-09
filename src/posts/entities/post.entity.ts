@@ -9,9 +9,17 @@ export class Post extends Document {
   @Prop()
   categories: string;
   @Prop()
+  core_target: string;
+  @Prop()
   brand: string;
   @Prop()
   description: string;
+  @Prop()
+  title: string;
+  @Prop()
+  result: string;
+  @Prop()
+  duration: number;
   @Prop({
     default: false
   })
@@ -43,7 +51,7 @@ export class Post extends Document {
   email: string
 
   @Prop()
-  displayName: string
+  username: string
 
   @Prop()
   photoURL: string

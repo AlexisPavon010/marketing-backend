@@ -1,4 +1,4 @@
-import { IsArray, IsOptional, IsString, MinLength } from "class-validator";
+import { IsArray, IsNumber, IsOptional, IsString, MinLength } from "class-validator";
 
 export class CreatePostDto {
 
@@ -9,6 +9,21 @@ export class CreatePostDto {
   @IsString()
   @MinLength(1)
   categories: string;
+
+  @IsString()
+  @MinLength(1)
+  core_target: string;
+
+  @IsNumber()
+  duration: number
+
+  @IsString()
+  @MinLength(1)
+  result: string;
+
+  @IsString()
+  @MinLength(1)
+  title: string;
 
   @IsString()
   @MinLength(1)
@@ -34,7 +49,7 @@ export class CreatePostDto {
 
   @IsString()
   @IsOptional()
-  displayName: string
+  username: string
 
   @IsString()
   @IsOptional()
