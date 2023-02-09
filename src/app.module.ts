@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { PostsModule } from './posts/posts.module';
 import { BrandsModule } from './brands/brands.module';
 import { EnvConfiguration } from './config/app.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { EnvConfiguration } from './config/app.config';
     MongooseModule.forRoot(process.env.MONGO_DB_URI),
     PostsModule,
     BrandsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
