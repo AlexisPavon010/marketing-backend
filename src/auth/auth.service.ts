@@ -18,6 +18,10 @@ export class AuthService {
 
   ) { }
 
+  async users() {
+    return await this.userModel.find({})
+  }
+
   async create(createUserDto: CreateUserDto) {
     try {
 
@@ -45,7 +49,7 @@ export class AuthService {
     const { password, email } = loginUserDto;
     const userDb = await this.userModel.findOne()
       .where({ email })
-      .select({ email: true, password: true, _id: true, isActive: true, roles: true, username: true })
+      .select({ email: true, password: true, _id: true, isActive: true, role: true, username: true })
 
     if (!userDb) throw new UnauthorizedException('El usuario o contraseña no son correctas');
 

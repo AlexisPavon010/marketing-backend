@@ -14,7 +14,7 @@ export class User {
   })
   isActive: boolean;
   @Prop({ type: String, default: 'user' })
-  roles: string[];
+  role: string[];
   @Prop({ default: now() })
   createdAt: Date;
   @Prop({ default: now() })
