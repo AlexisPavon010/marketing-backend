@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt'
 
 import { User } from './entities/user.entity';
-import { CreateUserDto, LoginUserDto } from './dto';
+import { CreateUserDto, LoginUserDto, UpdateUserDto } from './dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
@@ -62,6 +62,10 @@ export class AuthService {
       ...user,
       token: this.getJwtToken({ id: userDb.id })
     };
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    return this.userModel.findOneAndUpdate({ _id: id }, updateUserDto, { new: true })
   }
 
   private getJwtToken(payload: JwtPayload) {
