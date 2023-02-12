@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "MONGO_DB_URI": "mongodb+srv://test:1234Pavon@cluster0.zgmq0.mongodb.net/marketing?retryWrites=true&w=majority"
-  },
   "builds": [
     {
       "src": "src/main.ts",
