@@ -8,25 +8,31 @@ export class CreatePostDto {
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   categories: string;
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   core_target: string;
 
   @IsNumber()
+  @IsOptional()
   duration: number
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   result: string;
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   title: string;
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   brand: string;
 
   @IsOptional()
@@ -34,6 +40,7 @@ export class CreatePostDto {
 
   @IsString()
   @MinLength(1)
+  @IsOptional()
   description: string;
 
   @IsArray()
