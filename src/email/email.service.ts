@@ -63,7 +63,8 @@ export class EmailService {
       const template = handlebars.compile(htmlTemplate);
 
       const replacements = {
-        url: `${process.env.PUBLIC_BASE_URL}/reset-password/?token=${token}`
+        url: `${process.env.PUBLIC_BASE_URL}/reset-password/?token=${token}`,
+        username: user.username
       };
       const htmlToSend = template(replacements);
 
