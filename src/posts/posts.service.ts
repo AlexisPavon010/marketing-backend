@@ -116,7 +116,12 @@ export class PostsService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  remove(id: string) {
+    try {
+      return this.postModel.findByIdAndDelete(id)
+    } catch (error) {
+      console.log(error)
+      return new NotFoundException('El documento por su id no fuen encontrado');
+    }
   }
 }
