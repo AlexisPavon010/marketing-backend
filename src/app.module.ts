@@ -8,6 +8,7 @@ import { PostsModule } from './posts/posts.module';
 import { BrandsModule } from './brands/brands.module';
 import { EnvConfiguration } from './config/app.config';
 import { AuthModule } from './auth/auth.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './auth/auth.module';
     PostsModule,
     BrandsModule,
     AuthModule,
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [AppService],
