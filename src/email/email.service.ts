@@ -9,7 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt'
 
 
-import { RecoveryPassword, SendEmailDto } from './dto';
+import { PostulationDto, RecoveryPassword, SendEmailDto } from './dto';
 import { User } from 'src/auth/entities/user.entity';
 import { ResetPassword } from './dto/reset-password.dto';
 import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
@@ -26,28 +26,28 @@ export class EmailService {
   async send(sendEmailDto: SendEmailDto) {
     const user = await this.userModel.findOne({ email: sendEmailDto.email }).lean()
     if (!user) throw new BadRequestException('El usuario no existe!');
-    
-      try {
-        const htmlTemplatePath = join(__dirname, '../../src/templates/mail.html');
-        const htmlTemplate = readFileSync(htmlTemplatePath, 'utf-8');
 
-        const template = handlebars.compile(htmlTemplate);
-        const replacements = {
-          username: user.username
-        };
-        const htmlToSend = template(replacements);
+    try {
+      const htmlTemplatePath = join(__dirname, '../../src/templates/mail.html');
+      const htmlTemplate = readFileSync(htmlTemplatePath, 'utf-8');
 
-        return this.SendEmail({
-          from: 'info@intercorpmarketingawards.com',
-          to: user.email,
-          subject: 'Bienvenido a Intercorp Marketing Awards 2023',
-          html: htmlToSend
-        })
+      const template = handlebars.compile(htmlTemplate);
+      const replacements = {
+        username: user.username
+      };
+      const htmlToSend = template(replacements);
 
-      } catch (error) {
-        console.log(error)
-        return error
-      }
+      return this.SendEmail({
+        from: 'info@intercorpmarketingawards.com',
+        to: user.email,
+        subject: 'Bienvenido a Intercorp Marketing Awards 2023',
+        html: htmlToSend
+      })
+
+    } catch (error) {
+      console.log(error)
+      return error
+    }
   }
 
   async recovery(recoveryPassword: RecoveryPassword) {
@@ -94,6 +94,33 @@ export class EmailService {
     await user.save()
 
     return user
+  }
+
+  async postulation(postulationDto: PostulationDto) {
+    const user = await this.userModel.findOne({ email: postulationDto.email }).lean()
+    if (!user) throw new NotFoundException('El correo ingresado no existe')
+
+    try {
+      const htmlTemplatePath = join(__dirname, '../../src/templates/postulation.html');
+      const htmlTemplate = readFileSync(htmlTemplatePath, 'utf-8');
+
+      const template = handlebars.compile(htmlTemplate);
+      const replacements = {
+        username: user.username
+      };
+      const htmlToSend = template(replacements);
+
+      return this.SendEmail({
+        from: 'info@intercorpmarketingawards.com',
+        to: user.email,
+        subject: 'Postulaste tu caso con éxito a Intercorp Marketing Awards 2023',
+        html: htmlToSend
+      })
+
+    } catch (error) {
+      console.log(error)
+      return error
+    }
   }
 
   private getJwtToken(payload: JwtPayload) {
