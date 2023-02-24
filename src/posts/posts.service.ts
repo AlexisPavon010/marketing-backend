@@ -28,7 +28,7 @@ export class PostsService {
   }
 
   async findAll(queryPost: QueryPost) {
-    const { limit = 10, published = true, category, brand, skip = this.configServices.get('default_skip'), } = queryPost;
+    const { limit = 10, published = true, category, brand, status, skip = this.configServices.get('default_skip'), } = queryPost;
     let query = {};
 
     if (category) {
@@ -41,6 +41,13 @@ export class PostsService {
       query = {
         ...query,
         brand
+      }
+    }
+
+    if (status) {
+      query = {
+        ...query,
+        status
       }
     }
 

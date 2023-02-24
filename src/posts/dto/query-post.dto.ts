@@ -25,4 +25,8 @@ export class QueryPost {
   @IsOptional()
   @IsBoolean()
   published?: boolean
+
+  @IsOptional()
+  @IsString()
+  status: string;
 }
