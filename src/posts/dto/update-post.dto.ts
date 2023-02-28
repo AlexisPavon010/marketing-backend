@@ -4,6 +4,7 @@ import { CreatePostDto } from './create-post.dto';
 
 export class UpdatePostDto extends PartialType(CreatePostDto) {
 
+  @IsOptional()
   @IsBoolean()
   published: boolean;
   @IsNumber()
@@ -15,4 +16,7 @@ export class UpdatePostDto extends PartialType(CreatePostDto) {
   @IsString()
   @IsOptional()
   status: string
+  @IsOptional()
+  @IsBoolean()
+  scored: boolean
 }

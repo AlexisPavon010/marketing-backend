@@ -3,6 +3,8 @@ import { Document, now } from "mongoose";
 
 @Schema()
 export class Post extends Document {
+  @Prop({ type: Boolean, default: false })
+  scored: boolean
 
   @Prop()
   uid: string;
