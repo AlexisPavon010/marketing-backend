@@ -52,7 +52,7 @@ export class PostsService {
     }
 
     const posts = await this.postModel.find({ ...query, published })
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: 'desc', juryScore: -1 })
       .limit(limit)
       .skip((skip - 1))
     return {
@@ -104,13 +104,6 @@ export class PostsService {
       },
       posts
     }
-  }
-
-  async findOneByUserIdAndCategory(id: string, categories: string) {
-    const post = await this.postModel.findOne({ uid: id, categories })
-    if (!post) throw new NotFoundException(`Post with id "${id}" not found`)
-
-    return post;
   }
 
   async update(id: string, updatePostDto: UpdatePostDto) {
