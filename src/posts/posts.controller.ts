@@ -30,11 +30,6 @@ export class PostsController {
     return this.postsService.findOneByUserId(id, queryPost);
   }
 
-  @Get('/user/:id/category/:category')
-  findOneByUserIdAndCategory(@Param('id') id: string, @Param('category') category: string) {
-    return this.postsService.findOneByUserIdAndCategory(id, category);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(id, updatePostDto);
