@@ -52,7 +52,7 @@ export class PostsService {
     }
 
     const posts = await this.postModel.find({ ...query, published })
-      .sort({ createdAt: 'desc', juryScore: -1 })
+      .sort({ createdAt: 'desc', juryScore: 'asc' })
       .limit(limit)
       .skip((skip - 1))
     return {
@@ -92,7 +92,7 @@ export class PostsService {
       }
     }
     const posts = await this.postModel.find({ ...query, uid: id })
-      .sort({ createdAt: 'desc' })
+      .sort({ createdAt: 'desc', juryScore: 'asc' })
       .limit(limit)
       .skip((skip - 1))
 
