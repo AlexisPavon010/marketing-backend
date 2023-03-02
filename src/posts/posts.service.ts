@@ -28,8 +28,11 @@ export class PostsService {
   }
 
   async findAll(queryPost: QueryPost) {
-    const { limit = 10, published = true, category, brand, status, skip = this.configServices.get('default_skip'), } = queryPost;
+    const { limit = 10, published = true, category, brand, status, juryScore, skip = this.configServices.get('default_skip'), } = queryPost;
     let query = {};
+    let sort: any = {
+      createdAt: 'desc'
+    }
 
     if (category) {
       query = {
@@ -51,8 +54,14 @@ export class PostsService {
       }
     }
 
+    if (juryScore) {
+      sort = {
+        juryScore: juryScore
+      }
+    }
+
     const posts = await this.postModel.find({ ...query, published })
-      .sort({ createdAt: 'desc', juryScore: 'asc' })
+      .sort(sort)
       .limit(limit)
       .skip((skip - 1))
     return {
@@ -92,7 +101,7 @@ export class PostsService {
       }
     }
     const posts = await this.postModel.find({ ...query, uid: id })
-      .sort({ createdAt: 'desc', juryScore: 'asc' })
+      .sort({ createdAt: 'desc', juryScore: 'desc' })
       .limit(limit)
       .skip((skip - 1))
 

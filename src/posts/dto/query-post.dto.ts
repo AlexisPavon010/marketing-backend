@@ -29,4 +29,8 @@ export class QueryPost {
   @IsOptional()
   @IsString()
   status: string;
+
+  @IsOptional()
+  @IsString()
+  juryScore: string;
 }
