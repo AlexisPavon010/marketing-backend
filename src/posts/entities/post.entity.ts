@@ -1,8 +1,15 @@
 import { Schema, SchemaFactory, Prop } from "@nestjs/mongoose";
 import { Document, now } from "mongoose";
+import { ReviewSchema } from "./review.entity";
 
 @Schema()
 export class Post extends Document {
+  @Prop([ReviewSchema])
+  reviews: [ReviewSchema]
+  
+  @Prop({ type: Number, default: 0 })
+  numReviews: number;
+
   @Prop({ type: Boolean, default: false })
   scored: boolean
 
