@@ -38,7 +38,10 @@ export class EmailService {
       const htmlToSend = template(replacements);
 
       return this.SendEmail({
-        from: 'info@intercorpmarketingawards.com',
+        from: {
+          name: 'Intercorp Marketing Awards 2023',
+          address: 'info@intercorpmarketingawards.com'
+        },
         to: user.email,
         subject: 'Bienvenido a Intercorp Marketing Awards 2023',
         html: htmlToSend
@@ -111,7 +114,10 @@ export class EmailService {
       const htmlToSend = template(replacements);
 
       return this.SendEmail({
-        from: 'info@intercorpmarketingawards.com',
+        from: {
+          name: 'Intercorp Marketing Awards 2023',
+          address: 'info@intercorpmarketingawards.com'
+        },
         to: user.email,
         subject: 'Postulaste tu caso con éxito a Intercorp Marketing Awards 2023',
         html: htmlToSend
